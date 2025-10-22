@@ -1,0 +1,573 @@
+/* =========================================
+   THEME: PROFESSIONAL DARK MINIMAL
+   ========================================= */
+
+/* ... (toàn bộ CSS cũ từ :root đến * ... ) ... */
+:root {
+    --color-bg: #111418;
+    --color-primary: #9e005f; 
+    --color-secondary: #64748b; 
+    --color-text-light: #f5f5f5;
+    --color-text-muted: #a1a1aa;
+    --shadow-primary: 0 2px 12px rgba(255, 0, 0, 0.25);
+    --shadow-secondary: 0 2px 12px rgba(100, 116, 139, 0.25);
+    --border-soft: 1px solid rgba(116, 21, 21, 0.08);
+}
+@keyframes background-shift {
+    0% { background-position: 0 0; }
+    100% { background-position: 100% 100%; }
+}
+@keyframes text-fade-in {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes soft-glow {
+    from { box-shadow: var(--shadow-primary); }
+    to { box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3); }
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* === BODY (ĐÃ SỬA) === */
+body {
+    font-family: "Inter", "Poppins", sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text-light);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+
+    /* Nền mặc định (cho trang ABOUT) */
+    background-image: url('BG1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; 
+    
+    /* [THAY ĐỔI 1]: Thêm transition để chuyển nền mượt */
+    transition: background-image 0.6s ease-in-out;
+}
+
+/* [THAY ĐỔI 2]: Các class nền mới */
+body.bg-team {
+    background-image: url('BG2.jpg');
+}
+body.bg-projects {
+    background-image: url('BG3.jpg');
+}
+body.bg-contact {
+    background-image: url('BG4.jpg');
+}
+
+
+/* Lớp phủ tối toàn trang (Giữ nguyên) */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(17, 20, 24, 0.9); /* Lớp phủ tối */
+    pointer-events: none;
+    z-index: -1; 
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ... (toàn bộ CSS cho .main-nav, .nav-links, .hero-section, ... ) ... */
+/* ... (Giữ nguyên từ .main-nav đến .carousel-dots) ... */
+.main-nav {
+    width: 90%;
+    max-width: 1400px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px 0;
+    margin-bottom: 50px;
+    border-bottom: var(--border-soft);
+}
+.logo-text {
+    font-size: 1.5em;
+    color: var(--color-primary);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+.nav-links {
+    display: flex;
+    gap: 30px;
+    margin-left: auto;
+}
+.nav-link {
+    text-decoration: none;
+    color: var(--color-text-light);
+    font-size: 0.95em;
+    padding: 5px;
+    transition: color 0.3s, border-bottom 0.3s;
+    text-transform: uppercase;
+    border-bottom: 2px solid transparent;
+}
+.nav-link:hover,
+.nav-link.active {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+}
+.hero-section {
+    text-align: left;
+    width: 900px;
+    margin-bottom: 40px;
+    opacity: 0;
+}
+.hero-section.animate {
+    opacity: 1;
+    animation: text-fade-in 1s ease-out forwards;
+}
+.hero-section h1 {
+    font-size: 2.2em;
+    color: var(--color-text-light);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 15px;
+}
+.hero-section p {
+    font-size: 1em;
+    color: var(--color-text-muted);
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+.team-list-showcase {
+    width: 900px;
+    margin: 0 auto;
+    padding-bottom: 50px;
+}
+.agent-block {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 50px;
+    padding: 30px 0;
+    border-bottom: var(--border-soft);
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
+}
+.agent-block.animate {
+    opacity: 1;
+    animation: text-fade-in 0.8s ease-out forwards;
+}
+.agent-block:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    box-shadow: var(--shadow-primary);
+}
+.avatar-section {
+    flex-shrink: 0;
+    width: 250px;
+    text-align: center;
+}
+.avatar-container {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto 10px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: var(--border-soft);
+    box-shadow: var(--shadow-secondary);
+    transition: all 0.3s ease-in-out;
+}
+.avatar-container:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-primary);
+}
+.agent-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(1.05);
+}
+.agent-name-id-avatar {
+    font-size: 0.9em;
+    color: var(--color-secondary);
+}
+.info-section {
+    flex-grow: 1;
+    padding-top: 10px;
+}
+.agent-title {
+    font-size: 1.8em;
+    color: var(--color-primary);
+    margin-bottom: 15px;
+}
+.agent-spec {
+    font-size: 1.1em;
+    color: var(--color-text-muted);
+    margin-bottom: 20px;
+}
+.agent-skills {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 30px;
+}
+.agent-skills li {
+    font-size: 0.95em;
+    color: var(--color-text-light);
+    margin-bottom: 8px;
+}
+.agent-skills li span {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+.neon-button {
+    display: inline-block;
+    padding: 10px 25px;
+    background: transparent;
+    text-transform: uppercase;
+    font-size: 0.95em;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    margin-right: 20px;
+}
+.view-profile-btn {
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+}
+.view-profile-btn:hover {
+    background: var(--color-primary);
+    color: #fff;
+    box-shadow: var(--shadow-primary);
+}
+.access-terminal-btn {
+    color: var(--color-secondary);
+    border: 1px solid var(--color-secondary);
+}
+.access-terminal-btn:hover {
+    background: var(--color-secondary);
+    color: #fff;
+    box-shadow: var(--shadow-secondary);
+}
+.carousel-container {
+    width: 100%;
+    max-width: 1700px;
+    margin: 80px auto;
+    text-align: center;
+    overflow: hidden;
+}
+.carousel-title {
+    font-size: 2.5em;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+}
+.carousel-subtitle {
+    font-size: 1.1em;
+    color: var(--color-text-muted);
+    margin-bottom: 190px;
+}
+.carousel-wrapper {
+    position: relative;
+    height: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1200px;
+}
+.carousel-track {
+    position: absolute;
+    width: 320px;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+}
+.agent-card {
+    position: absolute;
+    width: 280px;
+    height: 400px;
+    background-color: #1b1f25;
+    border: var(--border-soft);
+    border-radius: 10px;
+    box-shadow: var(--shadow-secondary);
+    padding: 20px;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.6s ease, opacity 0.6s, box-shadow 0.3s;
+}
+.agent-card.visible {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 10;
+    box-shadow: var(--shadow-primary);
+    border-color: var(--color-primary);
+}
+.agent-card.neighbor {
+    opacity: 0.5;
+    cursor: pointer;
+}
+.card-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+.card-avatar {
+    width: 100%;
+    height: 60%;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+.card-name {
+    font-size: 1.5em;
+    color: var(--color-text-light);
+    font-weight: 600;
+}
+.card-role {
+    font-size: 1em;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+}
+.card-btn {
+    padding: 8px 20px;
+    font-size: 0.9em;
+    border-radius: 4px;
+}
+.carousel-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--color-text-light);
+    border: var(--border-soft);
+    padding: 10px 15px;
+    font-size: 1.4em;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+.carousel-nav-btn:hover {
+    background: var(--color-primary);
+    color: #fff;
+}
+.prev-btn { left: 40px; }
+.next-btn { right: 40px; }
+.carousel-dots {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.dot {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.dot.active {
+    background-color: var(--color-primary);
+    box-shadow: var(--shadow-primary);
+}
+
+/* --- Section Blocks (ĐÃ SỬA) --- */
+.section-block {
+    width: 900px;
+    margin: 80px auto;
+    padding: 40px;
+    border: var(--border-soft);
+    
+    /* [THAY ĐỔI 3]: Đổi màu nền sang trong suốt để thấy ảnh */
+    background-color: rgba(27, 31, 37, 0.8); /* 80% opacity of #1b1f25 */
+    
+    border-radius: 8px;
+    box-shadow: var(--shadow-secondary);
+}
+
+.section-title {
+    font-size: 2em;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    border-bottom: 2px solid rgba(59, 130, 246, 0.3);
+    padding-bottom: 10px;
+}
+
+/* ... (toàn bộ CSS cũ cho .section-description đến cuối file ... ) ... */
+/* ... (Giữ nguyên từ .section-description đến hết) ... */
+.section-description {
+    font-size: 1.1em;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+.key-principles {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 40px;
+}
+.key-principles li {
+    font-size: 1em;
+    color: var(--color-text-light);
+    margin-bottom: 10px;
+}
+.highlight-text {
+    color: var(--color-text-light);
+    font-weight: bold;
+}
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.neon-input {
+    width: 100%;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: var(--border-soft);
+    color: var(--color-text-light);
+    font-family: 'Inter', sans-serif;
+    font-size: 1em;
+    border-radius: 6px;
+    transition: all 0.3s;
+}
+.neon-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-primary);
+}
+textarea.neon-input {
+    resize: vertical;
+    min-height: 150px;
+}
+.footer-section {
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    border-top: var(--border-soft);
+    margin-top: 50px;
+    color: var(--color-text-muted);
+    font-size: 0.8em;
+}
+.page-section {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    min-height: 100vh;
+    width: 100%;
+}
+.page-section.active {
+    display: block;
+    opacity: 1;
+}
+@media (max-width: 768px) {
+    .main-nav {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    .nav-links {
+        margin-left: 0;
+        justify-content: center;
+    }
+    .social-icons {
+        margin-left: 0;
+        justify-content: center;
+    }
+    .hero-section, .section-block {
+        width: 90%;
+        margin: 30px auto;
+        padding: 20px;
+    }
+    .carousel-wrapper {
+        height: auto;
+        flex-direction: column;
+    }
+    .agent-card {
+        width: 90%;
+        height: auto;
+    }
+    .carousel-nav-btn {
+        display: none;
+    }
+}
+.hero-section {
+    margin-bottom: 40px; 
+}
+#about-us {
+    margin-top: 0; 
+    padding-top: 40px;
+}
+.section-block {
+  display: none;
+  opacity: 0;
+  transform: translateY(20px) scale(0.98); 
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out; 
+}
+.section-block.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0) scale(1); 
+}
+#custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    pointer-events: none; 
+    z-index: 10000; 
+    opacity: 0;
+    transform: translate(-50%, -50%); 
+}
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-left: 25px; 
+}
+.social-icons a {
+    color: var(--color-text-muted);
+    font-size: 1.2em;
+    transition: color 0.3s, transform 0.3s;
+}
+.social-icons a:hover {
+    color: var(--color-primary);
+    transform: scale(1.1);
+}
+.footer-socials {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+    font-size: 1.3em;
+}
+.footer-socials a {
+    color: var(--color-text-muted);
+    transition: color 0.3s, transform 0.3s;
+}
+.footer-socials a:hover {
+    color: var(--color-primary);
+}
+@keyframes bounce-up {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+.nav-link:hover,
+.neon-button:hover,
+.dot:hover,
+.footer-socials a:hover,
+.social-icons a:hover {
+    animation: bounce-up 0.4s ease;
+}
